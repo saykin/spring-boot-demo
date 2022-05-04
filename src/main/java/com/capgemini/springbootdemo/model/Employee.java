@@ -1,17 +1,14 @@
-package com.capgemini.springbootdemo.domain;
+package com.capgemini.springbootdemo.model;
 
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.RequiredArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import javax.persistence.*;
-import java.util.UUID;
 
 @Entity(name = "Employee")
 @Getter
 @Setter
-@RequiredArgsConstructor
+@AllArgsConstructor
+@NoArgsConstructor
 @Table(name = "employees")
 public class Employee {
 
@@ -25,4 +22,7 @@ public class Employee {
 
     @Column(name = "last_name", nullable = false)
     private String lastName;
+
+    @Column(name = "email", nullable = false)
+    private String email;
 }
