@@ -1,6 +1,5 @@
 package com.capgemini.springbootdemo.controller;
 
-import com.capgemini.springbootdemo.exception.ResourceNotFoundException;
 import com.capgemini.springbootdemo.model.Employee;
 import com.capgemini.springbootdemo.repository.EmployeeRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -36,8 +35,8 @@ public class EmployeeController {
     }
 
     @PutMapping("/employees/{id}")
-    public ResponseEntity < Employee > updateEmployee(@PathVariable(value = "id") Long employeeId,
-                                                      @Valid @RequestBody Employee employeeDetails) {
+    public ResponseEntity<Employee> updateEmployee(@PathVariable(value = "id") Long employeeId,
+                                                   @Valid @RequestBody Employee employeeDetails) {
         Employee employee = repository.findById(employeeId).orElseThrow();
 
         employee.setEmail(employeeDetails.getEmail());
@@ -48,7 +47,7 @@ public class EmployeeController {
     }
 
     @DeleteMapping("/employees/{id}")
-    public Map<String, Boolean> deleteEmployee(@PathVariable(value = "id") Long employeeId){
+    public Map<String, Boolean> deleteEmployee(@PathVariable(value = "id") Long employeeId) {
         repository.delete(repository.findById(employeeId).orElseThrow());
         Map<String, Boolean> response = new HashMap<>();
         response.put("deleted", Boolean.TRUE);
