@@ -2,19 +2,22 @@ package com.capgemini.springbootdemo.domain;
 
 import lombok.Getter;
 import lombok.Setter;
+import org.hibernate.annotations.GenericGenerator;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
+import java.util.UUID;
 
-@Entity(name = "Person")
+@Entity(name = "Employee")
 @Getter
 @Setter
-@Table(name = "person")
-public class Person {
+@Table(name = "employees")
+public class Employee {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name = "id", updatable = false, nullable = false)
+    private UUID id;
+
     @Column(name = "employeeId", updatable = false, nullable = false)
     private long employeeId;
 
