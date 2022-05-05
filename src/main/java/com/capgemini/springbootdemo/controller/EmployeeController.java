@@ -16,8 +16,12 @@ import java.util.Map;
 @RequestMapping("/api/v1")
 public class EmployeeController {
 
+    private final EmployeeRepository repository;
+
     @Autowired
-    EmployeeRepository repository;
+    public EmployeeController(EmployeeRepository repository) {
+        this.repository = repository;
+    }
 
     @GetMapping("/employees")
     public List<Employee> getAllEmployees() {
@@ -35,8 +39,7 @@ public class EmployeeController {
     }
 
     @PutMapping("/employees/{id}")
-    public ResponseEntity<Employee> updateEmployee(@PathVariable(value = "id") Long employeeId,
-                                                   @Valid @RequestBody Employee employeeDetails) {
+    public ResponseEntity<Employee> updateEmployee(@PathVariable(value = "id") Long employeeId, @Valid @RequestBody Employee employeeDetails) {
         Employee employee = repository.findById(employeeId).orElseThrow();
 
         employee.setEmail(employeeDetails.getEmail());
